@@ -21,9 +21,13 @@ function App() {
       expenseMoney: '120$',
     },
   ];
+
+  const onAddExpense = (expense) => {
+    console.log(expense);
+  };
   return (
     <div>
-      <AddNewExpense></AddNewExpense>
+      <AddNewExpense expenses={onAddExpense} />
       <Expenses items={expense} />
     </div>
   );
