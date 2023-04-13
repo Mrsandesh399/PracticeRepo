@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ExpenseFilter from './ExpenseFilter';
 import ExpenseItem from './ExpenseItem';
 
 export default function Expenses(props) {
+  const [filteredyear, setFilteredYear] = useState('2020');
+
+  const changeYearHandler = (year) => {
+    setFilteredYear(year);
+  };
+
+  const filterExpenses = props.items.filter((expense) => {
+    return expense.expenseDate.getFullYear().toString() === filteredyear;
+  });
+
   return (
     <div>
-      <ExpenseItem
-        title={props.items[0]?.expenseDescription}
-        amount={props.items[0]?.expenseMoney}
-        date={props.items[0]?.expenseDate}
+      <ExpenseFilter
+        selected={filteredyear}
+        onChangeFilter={changeYearHandler}
       />
-      <ExpenseItem
-        title={props.items[1].expenseDescription}
-        amount={props.items[1].expenseMoney}
-        date={props.items[1].expenseDate}
-      />
-      <ExpenseItem
-        title={props.items[2].expenseDescription}
-        amount={props.items[2].expenseMoney}
-        date={props.items[2].expenseDate}
-      />
+      {filterExpenses.length === 0 ? (
+        <p>No Expense Found!</p>
+      ) : (
+        filterExpenses?.map((expense) => (
+          <>
+            <ExpenseItem
+              title={expense.expenseDescription}
+              amount={expense.expenseMoney}
+              date={expense.expenseDate}
+            />
+          </>
+        ))
+      )}
     </div>
   );
 }

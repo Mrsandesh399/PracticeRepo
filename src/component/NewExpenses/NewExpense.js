@@ -21,8 +21,8 @@ export default function NewExpense(props) {
     e.preventDefault();
 
     const expenseData = {
-      expenseTitle: title,
-      expenseAmount: amount,
+      expenseDescription: title,
+      expenseMoney: amount,
       expenseDate: new Date(date),
     };
     props.onSaveData(expenseData);
