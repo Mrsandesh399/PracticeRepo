@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 const Login = (props) => {
+  const { t } = useTranslation();
+
   const [enteredEmail, setEnteredEmail] = useState('');
   const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState('');
@@ -56,7 +59,7 @@ const Login = (props) => {
             emailIsValid === false ? classes.invalid : ''
           }`}
         >
-          <label htmlFor="email">E-Mail</label>
+          <label htmlFor="email">{t('email')}</label>
           <input
             type="email"
             id="email"
@@ -70,7 +73,7 @@ const Login = (props) => {
             passwordIsValid === false ? classes.invalid : ''
           }`}
         >
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t('password')}</label>
           <input
             type="password"
             id="password"
@@ -81,7 +84,7 @@ const Login = (props) => {
         </div>
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-            Login
+            {t('login')}
           </Button>
         </div>
       </form>
